@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="easy_button_count">3</dimen>
+    <dimen name="easy_button_size">90dp</dimen>
+    <dimen name="easy_side_margin">55dp</dimen>
+
+
+
+    <dimen name="medium_button_count">4</dimen>
+    <dimen name="medium_button_size">75dp</dimen>
+    <dimen name="medium_side_margin">35dp</dimen>
+
+
+    <dimen name="hard_button_count">5</dimen>
+    <dimen name="hard_button_size">65dp</dimen>
+    <dimen name="hard_side_margin">25dp</dimen>
+</resources>
