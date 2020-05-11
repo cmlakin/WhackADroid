@@ -6,8 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D1D5CD"
-    tools:context="">
+    tools:context=".scoreboard.ScoreboardActivity">
 
+
+    <Spinner
+        android:id="@+id/scoreFilter"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:entries="@array/score_types"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <LinearLayout
         android:id="@+id/titleContainer"
@@ -15,7 +23,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreFilter"
         android:layout_height="wrap_content">
 
         <TextView
@@ -41,16 +49,6 @@
             android:textStyle="bold"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textColor="#F80202"
-            android:text="Misses"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -59,7 +57,6 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:spanCount="1"
         app:layout_constraintTop_toBottomOf="@id/titleContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:itemCount="4"

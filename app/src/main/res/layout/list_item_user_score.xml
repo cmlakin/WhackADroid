@@ -36,18 +36,5 @@
         android:paddingLeft="16dp"
         android:paddingRight="20dp" />
 
-    <TextView
-        android:id="@+id/tvMisses"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="20dp"
-        android:gravity="end"
-        android:textColor="#F80202"
-        android:textStyle="bold"
-        tools:text="0"
-        android:paddingLeft="16dp"
-        android:paddingRight="20dp"
-        />
 
 </LinearLayout>

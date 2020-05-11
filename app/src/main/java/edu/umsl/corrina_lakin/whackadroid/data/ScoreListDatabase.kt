@@ -7,18 +7,18 @@ import androidx.room.RoomDatabase
 
 
 @Database(
-    entities = [ScoreList::class],
-    version = 1,
+    entities = [Score::class],
+    version = 3,
     exportSchema = false
 )
 
 abstract class ScoreListDatabase: RoomDatabase() {
 
-    abstract fun ScoreListDao(): ScoresDao
+    abstract fun scoreListDao(): ScoresDao
 
     companion object {
         // name the db file
-        private const val DATABASE_FILE = "ScoreList.db"
+        private const val DATABASE_FILE = "Score.db"
         // reference to single instance of the db
         private lateinit var instance: ScoreListDatabase
 

@@ -3,55 +3,42 @@ package edu.umsl.corrina_lakin.whackadroid.utils
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import edu.umsl.corrina_lakin.whackadroid.data.ScoreList
+import edu.umsl.corrina_lakin.whackadroid.data.GameMode
+import edu.umsl.corrina_lakin.whackadroid.data.Score
 import edu.umsl.corrina_lakin.whackadroid.data.ScoreListDatabase
-import edu.umsl.corrina_lakin.whackadroid.data.ScoreListInfo
 import java.util.concurrent.Executors
 
 object DataRepository {
 
     private val handler by lazy { Handler(Looper.getMainLooper()) }
-    private val executor by lazy { Executors.newSingleThreadExecutor()}
+    private val executor by lazy { Executors.newSingleThreadExecutor() }
     private lateinit var database: ScoreListDatabase
 
-    fun createDatabase(context: Context) {
+    fun initiailize(context: Context) {
         database = ScoreListDatabase.getInstance(context.applicationContext)
     }
 
-    fun getScoreLists(callback: (List<ScoreList>) -> Unit) {
+    fun getScoresLists(mode: GameMode, callback: (List<Score>) -> Unit) {
         executor.execute {
-            val list = database.ScoreListDao().getScoresLists()
-            handler.post { callback.invoke(list)}
-        }
-    }
-
-    fun getScoreListsById(id: Long, callback: (ScoreListInfo) -> Unit) {
-        executor.execute {
-            val list = database.ScoreListDao().getScoreListById(id)
+            val list = database.scoreListDao().getScoresLists(mode.name)
             handler.post { callback.invoke(list) }
         }
     }
 
-    fun addScoreList(ScoreList:ScoreList, callback: (ScoreList) -> Unit){
+    fun addScore(score: Score, callback: () -> Unit) {
         executor.execute {
-            val id = database.ScoreListDao().addScoreList(ScoreList)
-            handler.post { callback.invoke(ScoreList)}
-        }
-    }
-
-    fun deleteScoreList(scoreListToDelete: ScoreList, callback: () -> Unit){
-        executor.execute {
-            val id = database.ScoreListDao().deleteScoreList(scoreListToDelete)
-            handler.post { callback.invoke()}
-        }
-    }
-
-    fun updateScoreList (itemToUpdate: ScoreList, callback: () -> Unit) {
-        executor.execute {
-            database.ScoreListDao().updateScoreList(itemToUpdate)
+            val id =database.scoreListDao().addScore(score)
             handler.post { callback.invoke() }
         }
     }
+
+    fun deleteScore(scoreToDelete: Score, callback: () -> Unit) {
+        executor.execute {
+            val id = database.scoreListDao().deleteScore(scoreToDelete)
+            handler.post { callback.invoke() }
+        }
+    }
+
 }
 
 

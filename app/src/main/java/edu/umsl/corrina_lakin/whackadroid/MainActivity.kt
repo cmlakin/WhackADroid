@@ -9,6 +9,8 @@ import android.view.View
 import android.view.View.OnClickListener
 import edu.umsl.corrina_lakin.whackadroid.data.GameMode
 import edu.umsl.corrina_lakin.whackadroid.game.GameActivity
+import edu.umsl.corrina_lakin.whackadroid.scoreboard.ScoreboardActivity
+import edu.umsl.corrina_lakin.whackadroid.utils.DataRepository
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), OnClickListener {
@@ -16,6 +18,9 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // init data repository
+        DataRepository.initiailize(this)
 
         // attach click listeners
         tv_easy.setOnClickListener(this)
@@ -29,18 +34,19 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         return true
     }
     //TODO: create ScoreBoard activity
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.action_scoreboard -> showScoreBoard()
-//        }
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_scoreboard -> showScoreboard()
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
-//    private fun showScoreboard(): Boolean {
-//        // show scoreboard
-//        val scoreBoardIntent = Intent(this, ScoreboardActivity::class.java)
-//        startActivity(scoreBoardIntent)
-//        return true
-//    }
+    private fun showScoreboard(): Boolean {
+        // show scoreboard
+        val scoreBoardIntent = Intent(this, ScoreboardActivity::class.java)
+        startActivity(scoreBoardIntent)
+        return true
+    }
 
     override fun onClick(v: View) {
         val mode = when (v.id) {

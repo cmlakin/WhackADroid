@@ -6,29 +6,49 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import edu.umsl.corrina_lakin.whackadroid.R
-import edu.umsl.corrina_lakin.whackadroid.data.ScoreList
+import edu.umsl.corrina_lakin.whackadroid.data.Score
+import edu.umsl.corrina_lakin.whackadroid.utils.DataRepository
 
-class ScoreboardAdapter(private val scores: List<ScoreList>)  {
+class ScoreboardAdapter : RecyclerView.Adapter<ScoreboardAdapter.ViewHolder>() {
 
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserScoreViewHolder {
-//        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_user_score, parent, false)
-//        return UserScoreViewHolder(view)
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return scores.size
-//    }
-//
-//    override fun onBindViewholder(holder: UserScoreViewHolder, position: Int) {
-//        //TODO implement
-//    }
 
-    inner class UserScoreViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        private val username = view.findViewById<TextView>(R.id.tvUserName)
-        private val userscore = view.findViewById<TextView>(R.id.tvScore)
-        private val misses = view.findViewById<TextView>(R.id.tvMisses)
+    val list: MutableList<Score> = mutableListOf()
 
-        //TODO implement binding
-//        fun bindTo()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.list_item_user_score,
+            parent,
+            false
+        )
+        return ViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return list.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = list[position]
+        holder.bindScore(item)
+    }
+
+    fun submitList(score: List<Score>) {
+        // update existing list
+        list.clear()
+        list.addAll(score)
+        notifyDataSetChanged()
+    }
+
+    inner class ViewHolder(v: View): RecyclerView.ViewHolder(v) {
+        private val username = v.findViewById<TextView>(R.id.tvUserName)
+        private val userscore = v.findViewById<TextView>(R.id.tvScore)
+        private lateinit var score: Score
+
+        fun bindScore(item: Score){
+            score = item
+            username.text = score.username
+            userscore.text = score.score.toString()
+        }
+
     }
 }

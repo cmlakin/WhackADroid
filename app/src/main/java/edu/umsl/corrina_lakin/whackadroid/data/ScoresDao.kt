@@ -4,20 +4,14 @@ import androidx.room.*
 
 @Dao
 interface ScoresDao {
-    @Query("SELECT * FROM score_list")
-    fun getScoresLists(): List<ScoreList>
-
-    @Query("SELECT * FROM score_list WHERE id= :id")
-    fun getScoreListById(id: Long): ScoreListInfo
+    @Query("SELECT * FROM score WHERE mode = :mode")
+    fun getScoresLists(mode: String): List<Score>
 
     @Insert
-    fun addScoreList (list: ScoreList): Long
-
-    @Update
-    fun updateScoreList (list: ScoreList)
+    fun addScore(list: Score): Long
 
     @Delete
-    fun deleteScoreList (list: ScoreList)
+    fun deleteScore (list: Score)
 
 }
 

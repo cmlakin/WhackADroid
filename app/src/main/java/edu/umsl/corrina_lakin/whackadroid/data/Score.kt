@@ -6,39 +6,39 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "score_list")
-data class ScoreList(
+@Entity(tableName = "score")
+data class Score(
     @PrimaryKey(autoGenerate = true)
     var id : Long = 0,
     var username: String,
     var score: Long,
-    var misses: Long
+    var mode: String
 ): Parcelable{
 
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readString()!!,
         parcel.readLong(),
-        parcel.readLong()
+        parcel.readString()!!
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(id)
         parcel.writeString(username)
         parcel.writeLong(score)
-        parcel.writeLong(misses)
+        parcel.writeString(mode)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<ScoreList> {
-        override fun createFromParcel(parcel: Parcel): ScoreList {
-            return ScoreList(parcel)
+    companion object CREATOR : Parcelable.Creator<Score> {
+        override fun createFromParcel(parcel: Parcel): Score {
+            return Score(parcel)
         }
 
-        override fun newArray(size: Int): Array<ScoreList?> {
+        override fun newArray(size: Int): Array<Score?> {
             return arrayOfNulls(size)
         }
     }
@@ -46,5 +46,5 @@ data class ScoreList(
 
 data class ScoreListInfo (
     @Embedded
-    var scoreList: ScoreList
+    var score: Score
 )

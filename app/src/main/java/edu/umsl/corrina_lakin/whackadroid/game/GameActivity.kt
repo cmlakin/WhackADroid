@@ -8,29 +8,33 @@ import edu.umsl.corrina_lakin.whackadroid.data.GameMode
 import edu.umsl.corrina_lakin.whackadroid.mvc.interfaces.GameController
 import edu.umsl.corrina_lakin.whackadroid.mvc.interfaces.GameView
 import edu.umsl.corrina_lakin.whackadroid.mvc.services.GameControllerImpl
+import edu.umsl.corrina_lakin.whackadroid.utils.ViewUtils
 import kotlinx.android.synthetic.main.activity_game.*
 
 class GameActivity: AppCompatActivity(), GameView  {
     private lateinit var adapter: GameAdapter
     private lateinit var controller: GameController
+    private lateinit var mode: GameMode
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
         val gameMode = intent.getStringExtra(KEY_GAME_MODE) ?: GameMode.EASY.name
-        controller = GameControllerImpl(this, 10)
-        setupUI(gameMode)
+        mode = GameMode.valueOf(gameMode)
+
+        setupUI()
     }
 
-    private fun setupUI(gameMode: String) {
+    private fun setupUI() {
+        // create controller
+        controller = GameControllerImpl(this, 10)
+
         // set timer to 2 mins
-        val timer = GameTimer(gameTimer,  30)
+        val timer = GameTimer(gameTimer,  10)
 
         // set text for current time
         gameTimer.text = timer.currentTime
-
-        val mode = GameMode.valueOf(gameMode)
 
         // setup start button
         startBtn.setOnClickListener {
@@ -48,8 +52,9 @@ class GameActivity: AppCompatActivity(), GameView  {
         recyclerView.layoutManager = GridLayoutManager(this, mode.count)
     }
 
-    override fun showResult() {
-
+    override fun showResult() = runOnUiThread {
+        val score = score.text.toString().toLong()
+        ViewUtils.showResult(this, score, mode, this::finish, this::setupUI)
     }
 
     override fun nextPosition(position: Int) {
