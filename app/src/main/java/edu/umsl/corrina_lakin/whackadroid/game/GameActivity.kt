@@ -19,7 +19,7 @@ class GameActivity: AppCompatActivity(), GameView  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-
+        // TODO get reference to layout inflater and make it not clickable here
         val gameMode = intent.getStringExtra(KEY_GAME_MODE) ?: GameMode.EASY.name
         mode = GameMode.valueOf(gameMode)
 
@@ -38,6 +38,10 @@ class GameActivity: AppCompatActivity(), GameView  {
 
         // setup start button
         startBtn.setOnClickListener {
+            startBtn.isClickable = false
+            startBtn.isEnabled = false
+            // TODO get reference to layout inflater and make it clickable here
+
             controller.startGame(mode, timer)
         }
 

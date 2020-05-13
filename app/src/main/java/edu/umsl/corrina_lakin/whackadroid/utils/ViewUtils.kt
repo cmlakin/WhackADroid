@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import edu.umsl.corrina_lakin.whackadroid.R
 import edu.umsl.corrina_lakin.whackadroid.data.GameMode
@@ -26,6 +27,8 @@ object ViewUtils {
             .inflate(R.layout.content_results, null, false)
 
         val userName = view.findViewById<EditText>(R.id.etUserName)
+        val userScore = view.findViewById<TextView>(R.id.tvScore)
+        userScore.text = score.toString()
 
         val btnTryAgain = view.findViewById<Button>(R.id.btnTryAgain)
         btnTryAgain.setOnClickListener {

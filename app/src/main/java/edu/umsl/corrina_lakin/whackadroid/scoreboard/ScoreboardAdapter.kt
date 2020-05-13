@@ -29,7 +29,7 @@ class ScoreboardAdapter : RecyclerView.Adapter<ScoreboardAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
-        holder.bindScore(item)
+        holder.bindTo(item)
     }
 
     fun submitList(score: List<Score>) {
@@ -42,12 +42,12 @@ class ScoreboardAdapter : RecyclerView.Adapter<ScoreboardAdapter.ViewHolder>() {
     inner class ViewHolder(v: View): RecyclerView.ViewHolder(v) {
         private val username = v.findViewById<TextView>(R.id.tvUserName)
         private val userscore = v.findViewById<TextView>(R.id.tvScore)
-        private lateinit var score: Score
+        //private lateinit var score: Score
 
-        fun bindScore(item: Score){
-            score = item
-            username.text = score.username
-            userscore.text = score.score.toString()
+        fun bindTo(item: Score){
+
+            username.text = item.username
+            userscore.text = item.score.toString()
         }
 
     }
