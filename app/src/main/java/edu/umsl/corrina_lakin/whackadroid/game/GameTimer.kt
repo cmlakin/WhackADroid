@@ -43,8 +43,8 @@ class GameTimer(private val textView: TextView, private var duration: Long) {
             }
         }
 
-        // schedule task to trigger update every second
-        timer.schedule(updateTask, 0, 1000L)
+        // schedule task to trigger update every half second
+        timer.schedule(updateTask, 0, 500L)
     }
 
     fun onTick(callback: TickListener) {
