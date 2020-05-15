@@ -6,7 +6,6 @@ import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import edu.umsl.corrina_lakin.whackadroid.R
 import edu.umsl.corrina_lakin.whackadroid.data.GameMode
-import edu.umsl.corrina_lakin.whackadroid.data.Score
 import edu.umsl.corrina_lakin.whackadroid.utils.DataRepository
 import kotlinx.android.synthetic.main.avtivity_scoreboard.*
 
@@ -25,8 +24,6 @@ class ScoreboardActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
 
         adapter = ScoreboardAdapter()
         rvUserScores.adapter = adapter
-
-        //getScoresLists()
 
         scoreFilter.onItemSelectedListener = this
     }

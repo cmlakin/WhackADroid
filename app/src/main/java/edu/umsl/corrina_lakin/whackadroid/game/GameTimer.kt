@@ -50,6 +50,4 @@ class GameTimer(private val textView: TextView, private var duration: Long) {
     fun onTick(callback: TickListener) {
         tickListeners.add(callback)
     }
-
-
 }

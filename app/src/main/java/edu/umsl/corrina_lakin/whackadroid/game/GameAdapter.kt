@@ -7,10 +7,9 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import edu.umsl.corrina_lakin.whackadroid.R
 import edu.umsl.corrina_lakin.whackadroid.data.GameMode
-import edu.umsl.corrina_lakin.whackadroid.mvc.interfaces.GameController
 
 
-class GameAdapter(mode: GameMode, private val controller: GameController) : RecyclerView.Adapter<GameAdapter.ViewHolder>() {
+class GameAdapter(mode: GameMode, private val onWack: (Int) -> Unit) : RecyclerView.Adapter<GameAdapter.ViewHolder>() {
     private val grid: Array<Boolean>
     private val buttonSize: Int
     private var currentItem = -1
@@ -29,6 +28,7 @@ class GameAdapter(mode: GameMode, private val controller: GameController) : Recy
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_button, parent, false)
+
 
         val size = parent.context.resources.getDimensionPixelSize(buttonSize)
 
@@ -81,7 +81,7 @@ class GameAdapter(mode: GameMode, private val controller: GameController) : Recy
         }
 
         override fun onClick(v: View) {
-            controller.checkPosition(gridPosition)
+            onWack.invoke(gridPosition)
         }
     }
 

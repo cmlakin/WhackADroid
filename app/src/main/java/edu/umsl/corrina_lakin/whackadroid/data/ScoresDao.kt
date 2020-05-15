@@ -10,9 +10,6 @@ interface ScoresDao {
     @Insert
     fun addScore(list: Score): Long
 
-    @Delete
-    fun deleteScore (list: Score)
-
 }
 
 

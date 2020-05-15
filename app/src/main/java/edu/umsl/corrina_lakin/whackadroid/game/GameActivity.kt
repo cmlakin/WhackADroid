@@ -15,11 +15,12 @@ class GameActivity: AppCompatActivity(), GameView  {
     private lateinit var adapter: GameAdapter
     private lateinit var controller: GameController
     private lateinit var mode: GameMode
+    private var hasStarted = false
+    private var hasEnded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-        // TODO get reference to layout inflater and make it not clickable here
         val gameMode = intent.getStringExtra(KEY_GAME_MODE) ?: GameMode.EASY.name
         mode = GameMode.valueOf(gameMode)
 
@@ -40,8 +41,8 @@ class GameActivity: AppCompatActivity(), GameView  {
         startBtn.setOnClickListener {
             startBtn.isClickable = false
             startBtn.isEnabled = false
-            // TODO get reference to layout inflater and make it clickable here
 
+            hasStarted = true
             controller.startGame(mode, timer)
         }
 
@@ -51,12 +52,13 @@ class GameActivity: AppCompatActivity(), GameView  {
         }
 
         // setup recycler view
-        adapter = GameAdapter(mode, controller)
+        adapter = GameAdapter(mode, this::onWackDroid)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this, mode.count)
     }
 
     override fun showResult() = runOnUiThread {
+        hasEnded = true
         val score = score.text.toString().toLong()
         ViewUtils.showResult(this, score, mode, this::finish, this::setupUI)
     }
@@ -65,6 +67,10 @@ class GameActivity: AppCompatActivity(), GameView  {
         adapter.selectItem(position)
     }
 
+    private fun onWackDroid(position: Int) {
+        if (!hasStarted || hasEnded) return
+        controller.checkPosition(position)
+    }
 
     companion object {
         const val KEY_GAME_MODE = "game_mode_key"

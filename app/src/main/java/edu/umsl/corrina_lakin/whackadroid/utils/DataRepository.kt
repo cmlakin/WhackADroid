@@ -32,13 +32,6 @@ object DataRepository {
         }
     }
 
-    fun deleteScore(scoreToDelete: Score, callback: () -> Unit) {
-        executor.execute {
-            val id = database.scoreListDao().deleteScore(scoreToDelete)
-            handler.post { callback.invoke() }
-        }
-    }
-
 }
 
 

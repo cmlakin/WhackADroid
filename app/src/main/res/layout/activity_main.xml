@@ -13,7 +13,7 @@
         android:layout_marginTop="72dp"
         android:fontFamily="@font/aclonica"
         android:text="Whack-A-Droid"
-        android:textColor="@android:color/holo_orange_dark"
+        android:textColor="#EA910B"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
             android:fontFamily="@font/atma_semibold"
             android:gravity="center_horizontal"
             android:text="Choose a Level:"
-            android:textColor="#3F51B5"
+            android:textColor="#526AED"
             android:textSize="40sp"
             android:textStyle="bold" />
 

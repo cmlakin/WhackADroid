@@ -7,10 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import edu.umsl.corrina_lakin.whackadroid.R
 import edu.umsl.corrina_lakin.whackadroid.data.Score
-import edu.umsl.corrina_lakin.whackadroid.utils.DataRepository
 
 class ScoreboardAdapter : RecyclerView.Adapter<ScoreboardAdapter.ViewHolder>() {
-
 
     val list: MutableList<Score> = mutableListOf()
 

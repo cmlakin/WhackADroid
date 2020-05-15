@@ -7,6 +7,7 @@ import edu.umsl.corrina_lakin.whackadroid.mvc.interfaces.GameModel
 import edu.umsl.corrina_lakin.whackadroid.mvc.interfaces.GameView
 
 class GameControllerImpl(private val view: GameView, points: Int): GameController {
+
     private var timeToUpdate = -1L
     private val model: GameModel = GameModelImpl(points)
     private var gameOver = false

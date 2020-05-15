@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:entries="@array/score_types"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/titleContainer"
@@ -29,25 +28,25 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/crushed"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:layout_weight="1"
-            android:textColor="#1414EF"
             android:text="Username"
+            android:textColor="#1414EF"
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/crushed"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textColor="#38AC38"
             android:text="Score"
+            android:textColor="#38AC38"
             android:textSize="15sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
     </LinearLayout>
 

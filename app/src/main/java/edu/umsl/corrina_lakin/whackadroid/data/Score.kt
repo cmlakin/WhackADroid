@@ -44,7 +44,3 @@ data class Score(
     }
 }
 
-data class ScoreListInfo (
-    @Embedded
-    var score: Score
-)
