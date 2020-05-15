@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
-    //TODO: create ScoreBoard activity
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_scoreboard -> showScoreboard()

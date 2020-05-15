@@ -32,7 +32,7 @@ class GameActivity: AppCompatActivity(), GameView  {
         controller = GameControllerImpl(this, 10)
 
         // set timer to 2 mins
-        val timer = GameTimer(gameTimer,  10)
+        val timer = GameTimer(gameTimer,  60)
 
         // set text for current time
         gameTimer.text = timer.currentTime

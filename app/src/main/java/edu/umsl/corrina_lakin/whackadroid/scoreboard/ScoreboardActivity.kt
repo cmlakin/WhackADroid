@@ -1,8 +1,10 @@
 package edu.umsl.corrina_lakin.whackadroid.scoreboard
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import edu.umsl.corrina_lakin.whackadroid.R
 import edu.umsl.corrina_lakin.whackadroid.data.GameMode
@@ -25,9 +27,19 @@ class ScoreboardActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         adapter = ScoreboardAdapter()
         rvUserScores.adapter = adapter
 
+        val list = GameMode.values().map { it.name }
+        scoreFilter.adapter = ArrayAdapter(this, R.layout.list_item_score_spinner, list)
         scoreFilter.onItemSelectedListener = this
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
+    }
 
     private fun getScoresLists(gameMode: GameMode = GameMode.EASY) {
         repository.getScoresLists(gameMode) {
